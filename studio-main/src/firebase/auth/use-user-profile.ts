@@ -13,12 +13,13 @@ export function useUserProfile() {
     return doc(db, 'users', user.uid) as any;
   }, [db, user]);
 
-  const { data: userProfile, loading: profileLoading } = useDoc<UserProfile>(userProfileRef);
+const { data: userProfile, loading: profileLoading } = useDoc<UserProfile>(userProfileRef);
 
   return {
     user,
     userProfile,
     loading: userLoading || profileLoading,
-    isAdmin: userProfile?.role === 'admin',
+    isAdmin: !!userProfile,
   };
+
 }
